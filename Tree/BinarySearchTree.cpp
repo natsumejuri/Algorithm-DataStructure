@@ -12,13 +12,14 @@ struct TreeNode
     TreeNode *right;
     TreeNode(int x):val(x),left(nullptr),right(nullptr){}
 };
-TreeNode *root=new TreeNode(0);
+TreeNode *root==new TreeNode(0);
 
 public:
 
 BinarySearchTree(vector<int> arr)//构造函数，读取数组转换为二叉搜索树结构
 {
-    root=new TreeNode(arr[0]);
+    if(arr.empty())return;
+    TreeNode *root=new TreeNode(arr[0]);
     if(arr.size()==1)return;
     for(int i=1;i<arr.size();i++){
         insert(arr[i]);
