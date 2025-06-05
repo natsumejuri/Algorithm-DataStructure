@@ -26,6 +26,7 @@ BinarySearchTree(vector<int> arr)//构造函数，读取数组转换为二叉搜
 }
 vector<int> bfs()//广度遍历
 {
+    if (root == nullptr) return {};
     TreeNode *cur=root;
     queue<TreeNode *> queue;
     queue.push(root);
@@ -53,14 +54,20 @@ TreeNode* search(int num)//搜索节点
 }
 void insert(int num)//插入节点
 {
-        TreeNode *cur=root,*pre=nullptr;
-        while(cur!=nullptr){
-            if(cur->val==num)return;
-            pre=cur;
-            if(cur->val<num)cur=cur->right;
-            else cur=cur->left;
+    if (root == nullptr) 
+    {
+    root = new TreeNode(num);
+    return;
+    }
+
+    TreeNode *cur=root,*pre=nullptr;
+    while(cur!=nullptr){
+        if(cur->val==num)return;
+        pre=cur;
+        if(cur->val<num)cur=cur->right;
+        else cur=cur->left;
             
-        }
+}
         TreeNode *node=new TreeNode(num);
         if (pre->val<num)pre->right=node;
         if (pre->val>num)pre->left=node;
@@ -75,29 +82,29 @@ void remove(int num)//删除节点
         else cur=cur->left;
     }
     if(cur==nullptr)return;
-    if(cur->left==nullptr||cur->right==nullptr)
-    {
-        TreeNode *child=cur->left!=nullptr?cur->left:cur->right;
-        if(cur!=root)
-        {
-            if(pre->left==cur)pre->left=child;
-            else pre->right=child;
+    if (cur->left && cur->right) {
+        TreeNode *succ=cur->right;
+        TreeNode *succPre=cur;
+        while (succ->left) {
+            succPre=succ;
+            succ=succ->left;
         }
-        else root=child;
-        delete cur;
+        cur->val=succ->val;
+        cur=succ;
+        pre=succPre;
     }
-    else
-    {
-        TreeNode *tmp=cur->right;
-        while(tmp->left!=nullptr)
-        {
-            tmp=tmp->left;
-        }
-        int val=tmp->val;
-        remove(tmp->val);
-        cur->val=val;
+    TreeNode *child=(cur->left)?cur->left:cur->right;
+
+    if (!pre) {
+        root=child;
+    } else if (pre->left==cur) {
+        pre->left=child;
+    } else {
+        pre->right=child;
     }
+    delete cur;
 }
+
 ~BinarySearchTree() {//析构函数
     destroy(root);
 }
