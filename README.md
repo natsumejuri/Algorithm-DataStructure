@@ -1,2 +1,2 @@
 # Algorithm&Data structure
-算法和数据结构相关
+个人练习用的算法和数据结构的仓库
