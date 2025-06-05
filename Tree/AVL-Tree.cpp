@@ -251,9 +251,6 @@ class AVLTree{
         insert(val);  
     }
     }
-
-        
-    
     ~AVLTree() {//析构函数
     destroy(root);
     }
