@@ -15,6 +15,7 @@ struct TreeNode
 TreeNode *root=nullptr;
 public:
 
+BinarySearchTree(){}
 BinarySearchTree(vector<int> arr)//构造函数，读取数组转换为二叉搜索树结构
 {
     for(int i:arr){
