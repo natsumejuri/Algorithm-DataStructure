@@ -79,7 +79,6 @@ class AVLTree{
                 node->right=rotate_right(node->right);
                 return rotate_left(node);
             }
-            return node;
         }
         return node;
     }
@@ -251,6 +250,7 @@ class AVLTree{
         insert(val);  
     }
     }
+      AVLTree(){}
     ~AVLTree() {//析构函数
     destroy(root);
     }
